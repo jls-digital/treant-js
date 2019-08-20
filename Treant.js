@@ -943,22 +943,29 @@
                 path.hidden = false;
             }
 
+            const hidePath = pathString.charAt(0) === "_";
+            path.attr({ path: hidePath ? pathString.substring(1) : pathString });
+            if (hidePath) {
+                path.hide();
+                path.hidden = true;
+            }
+
             // See: http://dmitrybaranovskiy.github.io/raphael/reference.html#Element.animate
-            path.animate(
-                {
-                    path: pathString.charAt(0) === "_"?
-                        pathString.substring(1):
-                        pathString // remove the "_" prefix if it exists
-                },
-                this.CONFIG.animation.connectorsSpeed,
-                this.CONFIG.animation.connectorsAnimation,
-                function() {
-                    if ( pathString.charAt(0) === "_" ) { // animation is hiding the path, hide it at the and of animation
-                        path.hide();
-                        path.hidden = true;
-                    }
-                }
-            );
+            // path.animate(
+            //     {
+            //         path: pathString.charAt(0) === "_"?
+            //             pathString.substring(1):
+            //             pathString // remove the "_" prefix if it exists
+            //     },
+            //     this.CONFIG.animation.connectorsSpeed,
+            //     this.CONFIG.animation.connectorsAnimation,
+            //     function() {
+            //         if ( pathString.charAt(0) === "_" ) { // animation is hiding the path, hide it at the and of animation
+            //             path.hide();
+            //             path.hidden = true;
+            //         }
+            //     }
+            // );
             return this;
         },
 
@@ -1652,7 +1659,7 @@
         toggleCollapse: function() {
             var oTree = this.getTree();
 
-            if ( !oTree.inAnimation ) {
+            // if ( !oTree.inAnimation ) {
                 oTree.inAnimation = true;
 
                 this.collapsed = !this.collapsed; // toggle the collapse at each click
@@ -1671,7 +1678,7 @@
                         oTree.CONFIG.animation.nodeSpeed:
                         oTree.CONFIG.animation.connectorsSpeed
                 );
-            }
+            // }
             return this;
         },
 
