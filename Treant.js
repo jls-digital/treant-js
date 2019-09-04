@@ -762,6 +762,10 @@
                     y: treeSize.y.max - treeHeight/2
                 };
 
+
+            const padding = 18;
+            UTIL.setDimensions( this.drawArea, this.drawArea.clientWidth, treeHeight + padding );
+
             this.handleOverflow(treeWidth, treeHeight);
 
             var
